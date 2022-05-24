@@ -51,7 +51,7 @@ defmodule EasyOtp do
   end
 
   @doc """
-  Will lookup a named thing in the registry.
+  Will lookup a named thing in the Registry.
 
   ## Parameters
   - given_registry_name
