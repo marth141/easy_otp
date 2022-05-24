@@ -1,6 +1,12 @@
 defmodule EasyOtp do
   @moduledoc """
   A small module showcasing making GenServers and Agents under a DynamicSupervisor with Registry.
+
+  Would be good to check out these articles:
+  - https://hexdocs.pm/elixir/1.13/Registry.html
+  - https://hexdocs.pm/elixir/1.13/DynamicSupervisor.html
+  - https://hexdocs.pm/elixir/1.13/Agent.html
+  - https://hexdocs.pm/elixir/1.13/GenServer.html
   """
 
   @doc """
