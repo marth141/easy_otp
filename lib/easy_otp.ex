@@ -47,7 +47,7 @@ defmodule EasyOtp do
     {:ok, pid} =
       DynamicSupervisor.start_child(
         EasyOtp.MyDynamicSupervisor,
-        {EasyOtp.Counter, [name: name]}
+        {EasyOtp.Counter, name: name}
       )
 
     {:ok, pid}
