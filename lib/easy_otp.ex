@@ -16,10 +16,8 @@ defmodule EasyOtp do
   - `given_registry_name`
   - `given_registry_value`
 
-  ## Examples
-
-      iex> EasyOtp.genserver_stack_start("genserver", [:registry_value])
-      {:ok, pid}
+  ## Returns
+  - `{:ok, pid()}` on success
 
   """
   def genserver_stack_start(given_registry_name, given_registry_value) do
@@ -38,10 +36,8 @@ defmodule EasyOtp do
   - `given_registry_name`
   - `given_registry_value`
 
-  ## Examples
-
-      iex> EasyOtp.agent_counter_start("agent", [:registry_value])
-      {:ok, pid}
+  ## Returns
+  - `{:ok, pid()}` on success
 
   """
   def agent_counter_start(given_registry_name, given_registry_value) do
@@ -59,10 +55,8 @@ defmodule EasyOtp do
   ## Parameters
   - `given_registry_name`
 
-  ## Examples
-
-      iex> EasyOtp.registry_lookup("genserver")
-      [{pid, :registry_value}]
+  ## Returns
+  - `[{pid(), any()}]` on success
 
   """
   def registry_lookup(given_registry_name) do
@@ -75,10 +69,8 @@ defmodule EasyOtp do
   ## Parameters
   - `pid`
 
-  ## Examples
-
-      iex> EasyOtp.genserver_stack_read(pid)
-      state
+  ## Returns
+  - `any()` on success
 
   """
   def genserver_stack_read(pid) do
@@ -92,10 +84,8 @@ defmodule EasyOtp do
   - `pid`
   - `element`
 
-  ## Examples
-
-      iex> EasyOtp.genserver_stack_push(pid, element)
-      :ok
+  ## Returns
+  - `:ok` on success
 
   """
   def genserver_stack_push(pid, element) do
@@ -108,10 +98,8 @@ defmodule EasyOtp do
   ## Parameters
   - `pid`
 
-  ## Examples
-
-      iex> EasyOtp.genserver_stack_pop(pid)
-      popped_state
+  ## Returns
+  - `any()` on success
 
   """
   def genserver_stack_pop(pid) do
@@ -124,10 +112,8 @@ defmodule EasyOtp do
   ## Parameters
   - `pid`
 
-  ## Examples
-
-      iex> EasyOtp.agent_counter_read(pid)
-      state
+  ## Returns
+  * `number()` on success
 
   """
   def agent_counter_read(pid) do
@@ -140,10 +126,8 @@ defmodule EasyOtp do
   ## Parameters
   - `pid`
 
-  ## Examples
-
-      iex> EasyOtp.agent_counter_read(pid)
-      :ok
+  ## Returns
+  - `:ok` on success
 
   """
   def agent_counter_increment(pid) do
