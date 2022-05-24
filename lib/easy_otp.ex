@@ -12,11 +12,11 @@ defmodule EasyOtp do
 
   ## Examples
 
-      iex> EasyOtp.make_dynamically_supervised_genserver("genserver", [:registry_value])
+      iex> EasyOtp.genserver_stack_start("genserver", [:registry_value])
       {:ok, pid}
 
   """
-  def make_dynamically_supervised_genserver(given_registry_name, given_registry_value) do
+  def genserver_stack_start(given_registry_name, given_registry_value) do
     name = {:via, Registry, {EasyOtp.MyRegistry, given_registry_name, given_registry_value}}
 
     {:ok, pid} =
@@ -26,7 +26,7 @@ defmodule EasyOtp do
   end
 
   @doc false
-  def make_dynamically_supervised_genserver() do
+  def genserver_stack_start() do
     name = {:via, Registry, {EasyOtp.MyRegistry, "genserver", [:registry_value]}}
 
     {:ok, pid} =
@@ -44,11 +44,11 @@ defmodule EasyOtp do
 
   ## Examples
 
-      iex> EasyOtp.make_dynamically_supervised_agent("agent", [:registry_value])
+      iex> EasyOtp.agent_counter_start("agent", [:registry_value])
       {:ok, pid}
 
   """
-  def make_dynamically_supervised_agent(given_registry_name, given_registry_value) do
+  def agent_counter_start(given_registry_name, given_registry_value) do
     name = {:via, Registry, {EasyOtp.MyRegistry, given_registry_name, given_registry_value}}
 
     {:ok, pid} =
@@ -60,7 +60,7 @@ defmodule EasyOtp do
     {:ok, pid}
   end
 
-  def make_dynamically_supervised_agent() do
+  def agent_counter_start() do
     name = {:via, Registry, {EasyOtp.MyRegistry, "agent", [:registry_value]}}
 
     {:ok, pid} =
