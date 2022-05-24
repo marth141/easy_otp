@@ -113,7 +113,7 @@ defmodule EasyOtp do
   - `pid`
 
   ## Returns
-  * `number()` on success
+  - `number()` on success
 
   """
   def agent_counter_read(pid) do
