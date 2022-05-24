@@ -3,8 +3,8 @@ defmodule EasyOtp.Stack do
 
   # Client
 
-  def start_link(default) when is_list(default) do
-    GenServer.start_link(__MODULE__, [:hello], name: default[:name])
+  def start_link(args) when is_list(args) do
+    GenServer.start_link(__MODULE__, [:hello], name: args[:name])
   end
 
   def read(pid) do

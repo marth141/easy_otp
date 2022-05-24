@@ -1,15 +1,15 @@
 defmodule EasyOtp.Counter do
   use Agent
 
-  def start_link(initial_value) do
-    Agent.start_link(fn -> 0 end, name: initial_value[:name])
+  def start_link(args) when is_list(args) do
+    Agent.start_link(fn -> 0 end, name: args[:name])
   end
 
-  def value do
-    Agent.get(__MODULE__, & &1)
+  def value(pid) do
+    Agent.get(pid, & &1)
   end
 
-  def increment do
-    Agent.update(__MODULE__, &(&1 + 1))
+  def increment(pid) do
+    Agent.update(pid, &(&1 + 1))
   end
 end

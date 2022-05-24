@@ -16,26 +16,40 @@ defmodule EasyOtp do
     :world
   end
 
-  def easy_genserver() do
+  def make_dynamically_supervised_genserver() do
     name = {:via, Registry, {EasyOtp.MyRegistry, "genserver", [:hello]}}
 
     {:ok, pid} =
       DynamicSupervisor.start_child(EasyOtp.MyDynamicSupervisor, {EasyOtp.Stack, name: name})
 
-    EasyOtp.Stack.read(pid)
+    {:ok, pid}
   end
 
-  def easy_agent() do
+  def make_dynamically_supervised_agent() do
     name = {:via, Registry, {EasyOtp.MyRegistry, "agent", [:hello]}}
 
-    {:ok, agent} =
+    {:ok, pid} =
       DynamicSupervisor.start_child(
         EasyOtp.MyDynamicSupervisor,
         {EasyOtp.Counter, [name: name]}
       )
 
-    Registry.lookup(EasyOtp.MyRegistry, "agent")
+    {:ok, pid}
+  end
 
-    Agent.get(agent, & &1)
+  def lookup_agent() do
+    Registry.lookup(EasyOtp.MyRegistry, "agent")
+  end
+
+  def lookup_genserver() do
+    Registry.lookup(EasyOtp.MyRegistry, "genserver")
+  end
+
+  def read_stack_genserver(pid) do
+    EasyOtp.Stack.read(pid)
+  end
+
+  def read_counter_agent(pid) do
+    EasyOtp.Counter.value(pid)
   end
 end
