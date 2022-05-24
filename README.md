@@ -2,7 +2,7 @@
 
 ![Alt text](/readme/observer_example.png?raw=true "Observer Example running a GenServer and Agent")
 
-This library is just to be a real quick and easy example of how to dynamically supervisor genservers and agents.
+This library is just to be a real quick and easy example of how to dynamically supervise genservers and agents.
 
 Copied the Agent and GenServer from the Elixir documentation circa 2022/05/24
 
