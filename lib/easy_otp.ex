@@ -7,8 +7,8 @@ defmodule EasyOtp do
   Will create a Stack GenServer under the DynamicSupervisor.
 
   ## Parameters
-  - given_registry_name
-  - given_registry_value
+  - `given_registry_name`
+  - `given_registry_value`
 
   ## Examples
 
@@ -29,8 +29,8 @@ defmodule EasyOtp do
   Will create a Counter Agent under the DynamicSupervisor.
 
   ## Parameters
-  - given_registry_name
-  - given_registry_value
+  - `given_registry_name`
+  - `given_registry_value`
 
   ## Examples
 
@@ -54,7 +54,7 @@ defmodule EasyOtp do
   Will lookup a named thing in the Registry.
 
   ## Parameters
-  - given_registry_name
+  - `given_registry_name`
 
   ## Examples
 
@@ -70,7 +70,7 @@ defmodule EasyOtp do
   Reads the state of a given Stack GenServer pid.
 
   ## Parameters
-  - pid
+  - `pid`
 
   ## Examples
 
@@ -86,8 +86,8 @@ defmodule EasyOtp do
   Pushes an element into a Stack GenServer's state.
 
   ## Parameters
-  - pid
-  - element
+  - `pid`
+  - `element`
 
   ## Examples
 
@@ -103,7 +103,7 @@ defmodule EasyOtp do
   Pops an element off a Stack GenServer's state.
 
   ## Parameters
-  - pid
+  - `pid`
 
   ## Examples
 
@@ -119,7 +119,7 @@ defmodule EasyOtp do
   Reads a Counter Agent's state.
 
   ## Parameters
-  - pid
+  - `pid`
 
   ## Examples
 
@@ -135,7 +135,7 @@ defmodule EasyOtp do
   Increments a Counter Agent's state.
 
   ## Parameters
-  - pid
+  - `pid`
 
   ## Examples
 
