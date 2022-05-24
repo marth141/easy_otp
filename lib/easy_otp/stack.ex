@@ -1,5 +1,6 @@
 defmodule EasyOtp.Stack do
   # Copied from https://hexdocs.pm/elixir/1.13/GenServer.html#module-client-server-apis
+
   use GenServer
 
   # Client
