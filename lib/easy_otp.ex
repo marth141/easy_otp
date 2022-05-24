@@ -25,7 +25,6 @@ defmodule EasyOtp do
     {:ok, pid}
   end
 
-  @doc false
   def genserver_stack_start() do
     name = {:via, Registry, {EasyOtp.MyRegistry, "genserver", [:registry_value]}}
 
