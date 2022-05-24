@@ -25,15 +25,6 @@ defmodule EasyOtp do
     {:ok, pid}
   end
 
-  def genserver_stack_start() do
-    name = {:via, Registry, {EasyOtp.MyRegistry, "genserver", [:registry_value]}}
-
-    {:ok, pid} =
-      DynamicSupervisor.start_child(EasyOtp.MyDynamicSupervisor, {EasyOtp.Stack, name: name})
-
-    {:ok, pid}
-  end
-
   @doc """
   Will create a Counter Agent under the DynamicSupervisor.
 
@@ -49,18 +40,6 @@ defmodule EasyOtp do
   """
   def agent_counter_start(given_registry_name, given_registry_value) do
     name = {:via, Registry, {EasyOtp.MyRegistry, given_registry_name, given_registry_value}}
-
-    {:ok, pid} =
-      DynamicSupervisor.start_child(
-        EasyOtp.MyDynamicSupervisor,
-        {EasyOtp.Counter, [name: name]}
-      )
-
-    {:ok, pid}
-  end
-
-  def agent_counter_start() do
-    name = {:via, Registry, {EasyOtp.MyRegistry, "agent", [:registry_value]}}
 
     {:ok, pid} =
       DynamicSupervisor.start_child(
