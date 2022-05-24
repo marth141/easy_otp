@@ -20,7 +20,10 @@ defmodule EasyOtp do
     name = {:via, Registry, {EasyOtp.MyRegistry, given_registry_name, given_registry_value}}
 
     {:ok, pid} =
-      DynamicSupervisor.start_child(EasyOtp.MyDynamicSupervisor, {EasyOtp.Stack, name: name})
+      DynamicSupervisor.start_child(
+        EasyOtp.MyDynamicSupervisor,
+        {EasyOtp.Stack, name: name}
+      )
 
     {:ok, pid}
   end
