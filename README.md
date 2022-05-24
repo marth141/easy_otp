@@ -2,6 +2,8 @@
 
 This library is just to be a real quick and easy example of how to dynamically supervisor genservers and agents.
 
+Copied the Agent and GenServer from the Elixir documentation circa 2022/05/24
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
