@@ -143,7 +143,7 @@ defmodule EasyOtp do
   ## Examples
 
       iex> EasyOtp.agent_counter_read(pid)
-      state
+      :ok
 
   """
   def agent_counter_increment(pid) do
