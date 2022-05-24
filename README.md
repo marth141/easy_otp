@@ -1,6 +1,8 @@
 # EasyOtp
 
-![Alt text](/readme/observer_example.png?raw=true "Observer Example running a GenServer and Agent")
+<img src="./readme/buzz.jpg" width="656" />
+
+<img src="./readme/observer_example.png" width="656" />
 
 This library is just to be a real quick and easy example of how to dynamically supervise genservers and agents.
 
