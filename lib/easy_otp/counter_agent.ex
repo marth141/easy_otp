@@ -1,4 +1,6 @@
 defmodule EasyOtp.Counter do
+  # Copied from https://hexdocs.pm/elixir/1.13/Agent.html#module-examples
+
   use Agent
 
   def start_link(args) when is_list(args) do

@@ -10,6 +10,9 @@ defmodule EasyOtp.Application do
     children = [
       # Starts a worker by calling: EasyOtp.Worker.start_link(arg)
       # {EasyOtp.Worker, arg}
+      # In this example, starts a Registry and DynamicSupervisor
+      # Registry Docs: https://hexdocs.pm/elixir/1.13/Registry.html
+      # DynamicSupervisor Docs: https://hexdocs.pm/elixir/1.13/DynamicSupervisor.html
       {Registry, name: EasyOtp.MyRegistry, keys: :unique},
       {DynamicSupervisor, name: EasyOtp.MyDynamicSupervisor, strategy: :one_for_one}
     ]

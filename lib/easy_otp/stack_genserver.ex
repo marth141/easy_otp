@@ -1,4 +1,5 @@
 defmodule EasyOtp.Stack do
+  # Copied from https://hexdocs.pm/elixir/1.13/GenServer.html#module-client-server-apis
   use GenServer
 
   # Client
@@ -12,7 +13,6 @@ defmodule EasyOtp.Stack do
   end
 
   def push(pid, element) do
-    Process.sleep(10000)
     GenServer.cast(pid, {:push, element})
   end
 
