@@ -64,6 +64,25 @@ defmodule EasyOtp do
   end
 
   @doc """
+  Returns the keys in the registry from the DynamicSuper.
+
+  ## Parameters
+  - `dynamic_supervisor`
+  - `registry`
+
+  ## Returns
+  - `[%{"registry_key" => any(), "pid" => pid(), "module" => atom()}]` on success
+
+  """
+  def registry_read(dynamic_supervisor, registry) do
+    DynamicSupervisor.which_children(dynamic_supervisor)
+    |> Enum.map(fn {_a, pid, _worker, [module]} ->
+      [key] = Registry.keys(registry, pid)
+      %{"registry_key" => key, "pid" => pid, "module" => module}
+    end)
+  end
+
+  @doc """
   Reads the state of a given Stack GenServer pid.
 
   ## Parameters
