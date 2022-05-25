@@ -86,7 +86,7 @@ defmodule EasyOtp do
   - `[%{"registry_key" => any(), "pid" => pid(), "module" => atom()}]` on success
 
   """
-  def dynamicsupervisor_read(registry, dynamic_supervisor) do
+  def registry_read(registry, dynamic_supervisor) do
     DynamicSupervisor.which_children(dynamic_supervisor)
     |> Enum.map(fn {_a, pid, _worker, [module]} ->
       [key] = Registry.keys(registry, pid)
