@@ -10,12 +10,12 @@ defmodule EasyOtp do
   """
 
   @doc """
-  Will create a Stack GenServer under the DynamicSupervisor.
+  Will create a Stack GenServer under the DynamicSupervisor and add it to the Registry.
 
   ## Parameters
   - `registry` (*type:* `atom()`)
   - `dynamic_supervisor` (*type:* `atom()`)
-  - `registry_name` (*type:* `any()`)
+  - `registry_key` (*type:* `any()`)
   - `optional_params`
     - `:registry_value` - (*type:* `any()`) - defaults to nil
 
@@ -24,10 +24,10 @@ defmodule EasyOtp do
   - `{:ok, pid()}` on success
 
   """
-  def genserver_stack_start(registry, dynamic_supervisor, registry_name, opts \\ []) do
+  def genserver_stack_start(registry, dynamic_supervisor, registry_key, opts \\ []) do
     registry_value = Keyword.get(opts, :registry_value, nil)
 
-    name = {:via, Registry, {registry, registry_name, registry_value}}
+    name = {:via, Registry, {registry, registry_key, registry_value}}
 
     DynamicSupervisor.start_child(
       dynamic_supervisor,
@@ -36,12 +36,12 @@ defmodule EasyOtp do
   end
 
   @doc """
-  Will create a Counter Agent under the DynamicSupervisor.
+  Will create a Counter Agent under the DynamicSupervisor and add it to the Registry.
 
   ## Parameters
   - `registry` (*type:* `atom()`)
   - `dynamic_supervisor` (*type:* `atom()`)
-  - `registry_name` (*type:* `any()`)
+  - `registry_key` (*type:* `any()`)
   - `optional_params`
     - `:registry_value` - (*type:* `any()`) - defaults to nil
 
@@ -49,10 +49,10 @@ defmodule EasyOtp do
   - `{:ok, pid()}` on success
 
   """
-  def agent_counter_start(registry, dynamic_supervisor, registry_name, opts \\ []) do
+  def agent_counter_start(registry, dynamic_supervisor, registry_key, opts \\ []) do
     registry_value = Keyword.get(opts, :registry_value, nil)
 
-    name = {:via, Registry, {registry, registry_name, registry_value}}
+    name = {:via, Registry, {registry, registry_key, registry_value}}
 
     DynamicSupervisor.start_child(
       dynamic_supervisor,
@@ -61,7 +61,7 @@ defmodule EasyOtp do
   end
 
   @doc """
-  Will lookup a named thing in the Registry.
+  Will lookup a key in the Registry.
 
   ## Parameters
   - `registry` (*type:* `atom()`)
