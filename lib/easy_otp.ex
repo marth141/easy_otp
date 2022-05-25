@@ -13,18 +13,24 @@ defmodule EasyOtp do
   Will create a Stack GenServer under the DynamicSupervisor.
 
   ## Parameters
-  - `given_registry_name`
-  - `given_registry_value`
+  - `registry` (*type:* `atom()`)
+  - `dynamic_supervisor` (*type:* `atom()`)
+  - `registry_name` (*type:* `any()`)
+  - `optional_params`
+    - `:registry_value` - (*type:* `any()`) - defaults to nil
+
 
   ## Returns
   - `{:ok, pid()}` on success
 
   """
-  def genserver_stack_start(given_registry_name, given_registry_value) do
-    name = {:via, Registry, {EasyOtp.MyRegistry, given_registry_name, given_registry_value}}
+  def genserver_stack_start(registry, dynamic_supervisor, registry_name, opts \\ []) do
+    registry_value = Keyword.get(opts, :registry_value, nil)
+
+    name = {:via, Registry, {registry, registry_name, registry_value}}
 
     DynamicSupervisor.start_child(
-      EasyOtp.MyDynamicSupervisor,
+      dynamic_supervisor,
       {EasyOtp.Stack, name: name}
     )
   end
@@ -33,18 +39,23 @@ defmodule EasyOtp do
   Will create a Counter Agent under the DynamicSupervisor.
 
   ## Parameters
-  - `given_registry_name`
-  - `given_registry_value`
+  - `registry` (*type:* `atom()`)
+  - `dynamic_supervisor` (*type:* `atom()`)
+  - `registry_name` (*type:* `any()`)
+  - `optional_params`
+    - `:registry_value` - (*type:* `any()`) - defaults to nil
 
   ## Returns
   - `{:ok, pid()}` on success
 
   """
-  def agent_counter_start(given_registry_name, given_registry_value) do
-    name = {:via, Registry, {EasyOtp.MyRegistry, given_registry_name, given_registry_value}}
+  def agent_counter_start(registry, dynamic_supervisor, registry_name, opts \\ []) do
+    registry_value = Keyword.get(opts, :registry_value, nil)
+
+    name = {:via, Registry, {registry, registry_name, registry_value}}
 
     DynamicSupervisor.start_child(
-      EasyOtp.MyDynamicSupervisor,
+      dynamic_supervisor,
       {EasyOtp.Counter, name: name}
     )
   end
@@ -53,28 +64,29 @@ defmodule EasyOtp do
   Will lookup a named thing in the Registry.
 
   ## Parameters
-  - `given_registry_name`
+  - `registry` (*type:* `atom()`)
+  - `registry_key` (*type:* `any()`)
 
   ## Returns
   - `[{pid(), any()}]` on success
 
   """
-  def registry_lookup(given_registry_name) do
-    Registry.lookup(EasyOtp.MyRegistry, given_registry_name)
+  def registry_lookup(registry, registry_key) do
+    Registry.lookup(registry, registry_key)
   end
 
   @doc """
-  Returns the keys in the registry from the DynamicSuper.
+  Returns the keys in a Registry linked to a DynamicSupervisor.
 
   ## Parameters
-  - `dynamic_supervisor`
-  - `registry`
+  - `registry` (*type:* `atom()`)
+  - `dynamic_supervisor` (*type:* `atom()`)
 
   ## Returns
   - `[%{"registry_key" => any(), "pid" => pid(), "module" => atom()}]` on success
 
   """
-  def registry_read(dynamic_supervisor, registry) do
+  def dynamicsupervisor_read(registry, dynamic_supervisor) do
     DynamicSupervisor.which_children(dynamic_supervisor)
     |> Enum.map(fn {_a, pid, _worker, [module]} ->
       [key] = Registry.keys(registry, pid)
@@ -86,7 +98,7 @@ defmodule EasyOtp do
   Reads the state of a given Stack GenServer pid.
 
   ## Parameters
-  - `pid`
+  - `pid` (*type:* `pid()`)
 
   ## Returns
   - `any()` on success
@@ -100,8 +112,8 @@ defmodule EasyOtp do
   Pushes an element into a Stack GenServer's state.
 
   ## Parameters
-  - `pid`
-  - `element`
+  - `pid` (*type:* `pid()`)
+  - `element` (*type:* `any()`)
 
   ## Returns
   - `:ok` on success
@@ -115,7 +127,7 @@ defmodule EasyOtp do
   Pops an element off a Stack GenServer's state.
 
   ## Parameters
-  - `pid`
+  - `pid` (*type:* `pid()`)
 
   ## Returns
   - `any()` on success
@@ -129,7 +141,7 @@ defmodule EasyOtp do
   Stops a Stack GenServer.
 
   ## Parameters
-  - `pid`
+  - `pid` (*type:* `pid()`)
 
   ## Returns
   - `:ok` on success
@@ -143,7 +155,7 @@ defmodule EasyOtp do
   Reads a Counter Agent's state.
 
   ## Parameters
-  - `pid`
+  - `pid` (*type:* `pid()`)
 
   ## Returns
   - `number()` on success
@@ -157,7 +169,7 @@ defmodule EasyOtp do
   Increments a Counter Agent's state.
 
   ## Parameters
-  - `pid`
+  - `pid` (*type:* `pid()`)
 
   ## Returns
   - `:ok` on success
@@ -171,7 +183,7 @@ defmodule EasyOtp do
   Stops a Counter Agent.
 
   ## Parameters
-  - `pid`
+  - `pid` (*type:* `pid()`)
 
   ## Returns
   - `:ok` on success
