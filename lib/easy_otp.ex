@@ -107,6 +107,20 @@ defmodule EasyOtp do
   end
 
   @doc """
+  Pops an element off a Stack GenServer's state.
+
+  ## Parameters
+  - `pid`
+
+  ## Returns
+  - `any()` on success
+
+  """
+  def genserver_stack_stop(pid) do
+    EasyOtp.Stack.stop_call(pid)
+  end
+
+  @doc """
   Reads a Counter Agent's state.
 
   ## Parameters

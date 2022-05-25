@@ -21,8 +21,12 @@ defmodule EasyOtp.Stack do
     GenServer.call(pid, :pop)
   end
 
-  def stop(pid) do
+  def stop_call(pid) do
     GenServer.call(pid, :stop)
+  end
+
+  def stop_cast(pid) do
+    GenServer.cast(pid, :stop)
   end
 
   # Server (callbacks)
@@ -42,11 +46,16 @@ defmodule EasyOtp.Stack do
   end
 
   def handle_call(:stop, _from, state) do
-    {:stop, :normal, state}
+    {:stop, :normal, :ok, state}
   end
 
   @impl true
   def handle_cast({:push, element}, state) do
     {:noreply, [element | state]}
+  end
+
+  @impl true
+  def handle_cast(:stop, state) do
+    {:stop, :normal, state}
   end
 end
