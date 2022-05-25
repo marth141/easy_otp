@@ -107,13 +107,13 @@ defmodule EasyOtp do
   end
 
   @doc """
-  Pops an element off a Stack GenServer's state.
+  Stops a Stack GenServer.
 
   ## Parameters
   - `pid`
 
   ## Returns
-  - `any()` on success
+  - `:ok` on success
 
   """
   def genserver_stack_stop(pid) do

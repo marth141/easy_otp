@@ -54,7 +54,6 @@ defmodule EasyOtp.Stack do
     {:noreply, [element | state]}
   end
 
-  @impl true
   def handle_cast(:stop, state) do
     {:stop, :normal, state}
   end
