@@ -1,7 +1,7 @@
 defmodule EasyOtp.Stack do
   # Copied from https://hexdocs.pm/elixir/1.13/GenServer.html#module-client-server-apis
 
-  use GenServer
+  use GenServer, restart: :temporary
 
   # Client
 
@@ -21,6 +21,10 @@ defmodule EasyOtp.Stack do
     GenServer.call(pid, :pop)
   end
 
+  def stop(pid) do
+    GenServer.call(pid, :stop)
+  end
+
   # Server (callbacks)
 
   @impl true
@@ -35,6 +39,10 @@ defmodule EasyOtp.Stack do
 
   def handle_call(:read, _from, state) do
     {:reply, state, state}
+  end
+
+  def handle_call(:stop, _from, state) do
+    {:stop, :normal, state}
   end
 
   @impl true
