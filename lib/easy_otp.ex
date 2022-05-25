@@ -133,4 +133,18 @@ defmodule EasyOtp do
   def agent_counter_increment(pid) do
     EasyOtp.Counter.increment(pid)
   end
+
+  @doc """
+  Stops a Counter Agent.
+
+  ## Parameters
+  - `pid`
+
+  ## Returns
+  - `:ok` on success
+
+  """
+  def agent_counter_stop(pid) do
+    EasyOtp.Counter.stop(pid)
+  end
 end
